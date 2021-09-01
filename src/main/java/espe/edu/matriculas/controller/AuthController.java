@@ -7,8 +7,8 @@ import espe.edu.matriculas.payload.request.LoginRequest;
 import espe.edu.matriculas.payload.request.SignUpRequest;
 import espe.edu.matriculas.payload.response.JwtResponse;
 import espe.edu.matriculas.payload.response.MessageResponse;
-import espe.edu.matriculas.repository.IRole;
-import espe.edu.matriculas.repository.IUser;
+import espe.edu.matriculas.repository.IRoleRep;
+import espe.edu.matriculas.repository.IUserRep;
 import espe.edu.matriculas.security.jwt.JwtUtils;
 import espe.edu.matriculas.security.services.UserDetailsImpl;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -27,7 +27,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,10 +40,10 @@ public class AuthController {
     AuthenticationManager auhthenticationManager;
 
     @Autowired
-    IUser userRepository;
+    IUserRep userRepository;
 
     @Autowired
-    IRole roleRepository;
+    IRoleRep roleRepository;
 
     @Autowired
     PasswordEncoder encoder;
