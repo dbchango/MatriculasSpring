@@ -7,7 +7,7 @@ import java.io.Serializable;
 public class Cuenta implements Serializable {
     @Id
     @Column(name = "Id")
-    private long Id;
+    private Long Id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_persona", nullable = false)
