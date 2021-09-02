@@ -49,13 +49,12 @@ public class PersonaController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity findById(@PathVariable Long id){
+    public ResponseEntity<?> findById(@PathVariable Long id){
         if(personaService.existsById(id)){
             return ResponseEntity.ok().body(personaService.findById(id));
         }else {
             return new ResponseEntity(new MessageResponse("La persona con el id: "+id+" no ha sido encontrada.") , HttpStatus.NOT_FOUND);
         }
     }
-
 
 }
