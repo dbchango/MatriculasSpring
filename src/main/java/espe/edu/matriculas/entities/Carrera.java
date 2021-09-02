@@ -20,17 +20,10 @@ public class Carrera implements Serializable {
     @Size(max = 50)
     private String nombre;
 
-    @Id
-    @Column(name = "Id_departamento")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long Id_departamento;
-    
     @NotBlank
     @Column(name = "descripcion")
     @Size(max = 200)
     private String descripcion;
-    
-
 
     @OneToMany(
             cascade = CascadeType.ALL, mappedBy = "carrera"
@@ -43,7 +36,6 @@ public class Carrera implements Serializable {
     public Carrera(long id, String nombre, long id_departamento, String descripcion) {
         Id = id;
         this.nombre = nombre;
-        Id_departamento = id_departamento;
         this.descripcion = descripcion;
         
     }
@@ -54,10 +46,6 @@ public class Carrera implements Serializable {
 
     public String getNombre() {
         return nombre;
-    }
-    
-    public long getId_departamento() {
-        return Id_departamento;
     }
 
     public String getDescripcion() {
@@ -70,10 +58,6 @@ public class Carrera implements Serializable {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-    
-    public void setId_departamento(long id_departamento) {
-    	Id_departamento = id_departamento;
     }
 
     public void setDescripcion(String descripcion) {

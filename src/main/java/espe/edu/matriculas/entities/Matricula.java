@@ -14,8 +14,29 @@ public class Matricula implements Serializable{
 	
 	@Id
 	@Column(name = "Id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Id;
 	
+
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_curso", nullable = false)
+	private Curso curso;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_persona", nullable = false)
+	private Persona persona;
+
+	@OneToMany(
+            cascade = CascadeType.ALL, mappedBy = "matricula"
+    )
+    private List<Cuenta> cuentas;
+    
+    
+	@CreatedDate
+	@Column(name = "fecha_creacion")
+	private Date fecha_creacion;
+
 	public Long getId() {
 		return Id;
 	}
@@ -60,15 +81,7 @@ public class Matricula implements Serializable{
 		this.fecha_creacion = fecha_creacion;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_curso", nullable = false)
-	private Curso curso;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_persona", nullable = false)
-	private Persona persona;
-
-    public List<Cuenta> getCuentas() {
+	public List<Cuenta> getCuentas() {
 		return cuentas;
 	}
 
@@ -76,14 +89,4 @@ public class Matricula implements Serializable{
 		this.cuentas = cuentas;
 	}
 
-	@OneToMany(
-            cascade = CascadeType.ALL, mappedBy = "cuenta"
-    )
-    private List<Cuenta> cuentas;
-    
-    
-	@CreatedDate
-	@Column(name = "fecha_creacion")
-	private Date fecha_creacion;
-	
 }

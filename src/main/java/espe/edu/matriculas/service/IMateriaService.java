@@ -2,6 +2,7 @@ package espe.edu.matriculas.service;
 
 import java.util.List;
 
+import espe.edu.matriculas.entities.Curso;
 import espe.edu.matriculas.entities.Materia;
 
 public interface IMateriaService {
@@ -11,6 +12,6 @@ public interface IMateriaService {
 	
 	public void delete(Materia materia);
 	
-	public List<Cursos> findMateriaCursos(long id);
+	public List<Curso> findMateriaCursos(long id);
 
 }
