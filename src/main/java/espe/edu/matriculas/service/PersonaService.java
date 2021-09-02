@@ -37,4 +37,9 @@ public class PersonaService implements IPersonaService {
     public boolean existsById(Long id) {
         return dao.existsById(id);
     }
+
+    @Override
+    public Persona findById(Long id) {
+        return dao.findById(id).get();
+    }
 }

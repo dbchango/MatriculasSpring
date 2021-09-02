@@ -15,4 +15,6 @@ public interface IPersonaService {
     public List<Cuenta> findCuentas(long id);
 
     public boolean existsById(Long id);
+
+    public Persona findById(Long id);
 }
