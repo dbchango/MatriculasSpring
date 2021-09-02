@@ -13,7 +13,6 @@ public class PersonaService implements IPersonaService {
     @Autowired
     private IPersonaRep dao;
 
-
     @Override
     public void save(Persona persona) {
         dao.save(persona);
@@ -25,12 +24,17 @@ public class PersonaService implements IPersonaService {
     }
 
     @Override
-    public void delete(Persona persona) {
-        dao.delete(persona);
+    public void delete(Long id) {
+        dao.deleteById(id);
     }
 
     @Override
-    public List<Cuenta> findPersonaCuentas(long id){
+    public List<Cuenta> findCuentas(long id){
         return dao.findById(id).get().getCuentas();
+    }
+
+    @Override
+    public boolean existsById(Long id) {
+        return dao.existsById(id);
     }
 }

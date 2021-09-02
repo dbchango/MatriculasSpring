@@ -11,6 +11,7 @@ import espe.edu.matriculas.repository.IRoleRep;
 import espe.edu.matriculas.repository.IUserRep;
 import espe.edu.matriculas.security.jwt.JwtUtils;
 import espe.edu.matriculas.security.services.UserDetailsImpl;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.HashSet;

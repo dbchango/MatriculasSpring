@@ -1,8 +1,12 @@
 package espe.edu.matriculas.controller;
 
 import espe.edu.matriculas.entities.Cuenta;
+import espe.edu.matriculas.entities.Persona;
+import espe.edu.matriculas.payload.response.MessageResponse;
 import espe.edu.matriculas.service.PersonaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +23,32 @@ public class PersonaController {
     PersonaService personaService;
 
     @GetMapping("/{id}/list/cuentas")
-    public List<Cuenta> listCuentas(@PathVariable Long id){
-        return personaService.findPersonaCuentas(id);
+    public List<Cuenta> list(@PathVariable Long id){
+        return personaService.findCuentas(id);
+    }
+
+    @PostMapping("")
+    public Persona save(@RequestBody Persona persona){
+        personaService.save(persona);
+        return persona;
+    }
+
+    @DeleteMapping("{id}")
+    public void delete(@PathVariable Long id){
+        personaService.delete(id);
+    }
+
+    @GetMapping("")
+    public List<Persona> list(){
+        return personaService.findAll();
+    }
+
+    @GetMapping("{id}/exists")
+    public ResponseEntity exists(@PathVariable Long id){
+        if(personaService.existsById(id)){
+            return ResponseEntity.ok(new MessageResponse("User exists"));
+        }else {
+            return new ResponseEntity(new MessageResponse("User does not exists"), HttpStatus.NOT_FOUND);
+        }
     }
 }

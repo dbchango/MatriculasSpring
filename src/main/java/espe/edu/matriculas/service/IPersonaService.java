@@ -10,7 +10,9 @@ public interface IPersonaService {
 
     public List<Persona> findAll();
 
-    public void delete(Persona persona);
+    public void delete(Long id);
 
-    public List<Cuenta> findPersonaCuentas(long id);
+    public List<Cuenta> findCuentas(long id);
+
+    public boolean existsById(Long id);
 }
