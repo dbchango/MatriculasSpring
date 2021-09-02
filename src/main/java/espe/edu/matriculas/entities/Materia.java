@@ -1,5 +1,4 @@
 package espe.edu.matriculas.entities;
-<<<<<<< HEAD
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -14,12 +13,33 @@ import java.util.List;
 @Table(name = "materias")
 @Entity
 public class Materia {
+
 	@Id
     @Column(name = "Id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long Id;
 
-    public long getId() {
+	@NotBlank
+	@Column(name = "nombre")
+	@Size(max = 50)
+	private String nombre;
+
+	@OneToMany(
+			cascade = CascadeType.ALL, mappedBy = "materia"
+	)
+	private List<Curso> cursos;
+
+	@CreatedDate
+	@Column(name = "fecha_creacion")
+	private Date fecha_creacion;
+
+	@ManyToOne(
+			fetch = FetchType.LAZY
+	)
+	@JoinColumn(name = "id_carrera", nullable = false)
+	private Carrera carrera;
+
+	public long getId() {
 		return Id;
 	}
 
@@ -35,12 +55,12 @@ public class Materia {
 		this.nombre = nombre;
 	}
 
-	public long getId_carrera() {
-		return Id_carrera;
+	public List<Curso> getCursos() {
+		return cursos;
 	}
 
-	public void setId_carrera(long id_carrera) {
-		Id_carrera = id_carrera;
+	public void setCursos(List<Curso> cursos) {
+		this.cursos = cursos;
 	}
 
 	public Date getFecha_creacion() {
@@ -50,47 +70,23 @@ public class Materia {
 	public void setFecha_creacion(Date fecha_creacion) {
 		this.fecha_creacion = fecha_creacion;
 	}
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_carrera", nullable = false)
-	
-	@OneToMany(
-            cascade = CascadeType.ALL, mappedBy = "carrera"
-    )
-    private List<Curso> cursos;
-	
 
-	@NotBlank
-    @Column(name = "nombre")
-    @Size(max = 50)
-    private String nombre;
+	public Carrera getCarrera() {
+		return carrera;
+	}
 
-    @Id
-    @Column(name = "Id_carrera")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long Id_carrera;
-    
-    @CreatedDate
-	@Column(name = "fecha_creacion")
-	private Date fecha_creacion;
+	public void setCarrera(Carrera carrera) {
+		this.carrera = carrera;
+	}
 
 	public Materia() {
-		super();
 	}
 
-	public Materia(long id, @NotBlank @Size(max = 50) String nombre, long id_carrera, Date fecha_creacion) {
-		super();
+	public Materia(long id, String nombre, List<Curso> cursos, Date fecha_creacion, Carrera carrera) {
 		Id = id;
 		this.nombre = nombre;
-		Id_carrera = id_carrera;
+		this.cursos = cursos;
 		this.fecha_creacion = fecha_creacion;
+		this.carrera = carrera;
 	}
-    
-
-	
-=======
-
-public class Materia {
->>>>>>> 367749ab78718b2737315dc62c68f7624af71133
-
 }

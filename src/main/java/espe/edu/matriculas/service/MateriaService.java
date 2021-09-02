@@ -2,13 +2,12 @@ package espe.edu.matriculas.service;
 
 import java.util.List;
 
+import espe.edu.matriculas.entities.Curso;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import espe.edu.matriculas.entities.Cuenta;
 import espe.edu.matriculas.entities.Materia;
 import espe.edu.matriculas.repository.IMateriaRep;
-import espe.edu.matriculas.repository.IPersonaRep;
 
 @Service
 public class MateriaService implements IMateriaService{
@@ -33,7 +32,7 @@ public class MateriaService implements IMateriaService{
 	    }
 
 	    @Override
-	    public List<Materia> findMateriaCursos(long id){
+	    public List<Curso> findMateriaCursos(long id){
 	        return dao.findById(id).get().getCursos();
 	    }
 }

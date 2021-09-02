@@ -14,6 +14,7 @@ import java.util.Date;
 public class Curso implements Serializable{
 	@Id
 	@Column(name = "Id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Id;
 	
 	public Long getId() {

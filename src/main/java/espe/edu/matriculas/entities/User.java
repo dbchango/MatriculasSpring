@@ -14,7 +14,8 @@ import java.util.Set;
         }
 )
 public class User {
-    @javax.persistence.Id
+    @Id
+    @Column(name = "Id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
 

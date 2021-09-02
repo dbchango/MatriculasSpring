@@ -2,6 +2,7 @@ package espe.edu.matriculas.controller;
 
 import java.util.List;
 
+import espe.edu.matriculas.entities.Curso;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -25,9 +26,9 @@ public class MateriaController {
     @Autowired
     MateriaService materiaService;
     
-    @GetMapping("/{id}/list/carreras")
-    public List<Carrera> listCarrera(@PathVariable Long id){
-        return materiaService.findMateriaCarreras(id);
+    @GetMapping("/{id}/list/cursos")
+    public List<Curso> listCarrera(@PathVariable Long id){
+        return materiaService.findMateriaCursos(id);
     }
 
 }
