@@ -1,4 +1,5 @@
 package espe.edu.matriculas.entities;
+<<<<<<< HEAD
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -87,5 +88,9 @@ public class Materia {
     
 
 	
+=======
+
+public class Materia {
+>>>>>>> 367749ab78718b2737315dc62c68f7624af71133
 
 }
