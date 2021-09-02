@@ -1,26 +1,25 @@
 package espe.edu.matriculas.service;
 
 import espe.edu.matriculas.entities.Cuenta;
-import espe.edu.matriculas.entities.Persona;
-import espe.edu.matriculas.repository.IPersonaRep;
+import espe.edu.matriculas.repository.ICuentaRep;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class PersonaService implements IPersonaService {
+public class CuentaService implements ICuentaService{
     @Autowired
-    private IPersonaRep dao;
+    ICuentaRep dao;
 
     @Override
-    public void save(Persona persona) {
-        dao.save(persona);
+    public List<Cuenta> findAll() {
+        return dao.findAll();
     }
 
     @Override
-    public List<Persona> findAll() {
-        return dao.findAll();
+    public void save(Cuenta cuenta) {
+        dao.save(cuenta);
     }
 
     @Override
@@ -29,17 +28,12 @@ public class PersonaService implements IPersonaService {
     }
 
     @Override
-    public List<Cuenta> findCuentas(long id){
-        return dao.findById(id).get().getCuentas();
-    }
-
-    @Override
     public boolean existsById(Long id) {
         return dao.existsById(id);
     }
 
     @Override
-    public Persona findById(Long id) {
+    public Cuenta findById(Long id) {
         return dao.findById(id).get();
     }
 }

@@ -44,11 +44,17 @@ public class PersonaController {
     }
 
     @GetMapping("{id}/exists")
-    public ResponseEntity exists(@PathVariable Long id){
+    public Boolean exists(@PathVariable Long id){
+        return personaService.existsById(id);
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity<?> findById(@PathVariable Long id){
         if(personaService.existsById(id)){
-            return ResponseEntity.ok(new MessageResponse("User exists"));
+            return ResponseEntity.ok().body(personaService.findById(id));
         }else {
-            return new ResponseEntity(new MessageResponse("User does not exists"), HttpStatus.NOT_FOUND);
+            return new ResponseEntity(new MessageResponse("La persona con el id: "+id+" no ha sido encontrada.") , HttpStatus.NOT_FOUND);
         }
     }
+
 }
