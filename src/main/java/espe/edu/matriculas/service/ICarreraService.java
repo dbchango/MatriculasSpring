@@ -14,4 +14,6 @@ public interface ICarreraService {
 
     public List<Materia> findCarreraMaterias(long id);
 
+    public Carrera findById(Long id);
+
 }

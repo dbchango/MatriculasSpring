@@ -30,5 +30,10 @@ public class CarreraService implements ICarreraService {
 	 public List<Materia> findCarreraMaterias(long id){
 		 return dao.findById(id).get().getMaterias();
 	 }
-	 
+
+	@Override
+	public Carrera findById(Long id) {
+		return dao.findById(id).get();
+	}
+
 }

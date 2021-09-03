@@ -30,4 +30,9 @@ public class CarreraController {
 		return carrera;
 
 	}
+
+	@GetMapping("/{id}")
+	public Carrera save(@PathVariable Long id){
+		return carreraService.findById(id);
+	}
 }
