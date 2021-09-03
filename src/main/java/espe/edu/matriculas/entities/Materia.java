@@ -80,6 +80,7 @@ public class Materia {
 	}
 
 	public Materia() {
+		super();
 	}
 
 	public Materia(long id, String nombre, List<Curso> cursos, Date fecha_creacion, Carrera carrera) {
@@ -87,6 +88,5 @@ public class Materia {
 		this.nombre = nombre;
 		this.cursos = cursos;
 		this.fecha_creacion = fecha_creacion;
-		this.carrera = carrera;
 	}
 }

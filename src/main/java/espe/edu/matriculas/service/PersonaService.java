@@ -42,4 +42,9 @@ public class PersonaService implements IPersonaService {
     public Persona findById(Long id) {
         return dao.findById(id).get();
     }
+
+    @Override
+    public List<Cuenta> findCuentasPendientes(Long id) {
+        return null;
+    }
 }
