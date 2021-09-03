@@ -14,7 +14,7 @@ public class CarreraService implements ICarreraService {
 	
 	 @Override
 	 public void save(Carrera carrera) {
-		 dao.save(carrera);
+		 dao.saveAndFlush(carrera);
 	 }
 
 	 @Override

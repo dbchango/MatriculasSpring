@@ -8,6 +8,7 @@ import org.springframework.data.annotation.CreatedDate;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "cursos")
@@ -16,7 +17,62 @@ public class Curso implements Serializable{
 	@Column(name = "Id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Id;
+
+	@NotBlank
+	@Column(name = "nombre")
+	@Size(max = 50)
+	private String nombre;
 	
+	@NotBlank
+	@Column(name = "nrc")
+	@Size(max = 5)
+	private String nrc;
+
+	@Column(name = "descripcion")
+	@Size(max = 255)
+	private String descripcion;
+
+	@Column(name = "fecha_creacion")
+	private Date fecha_creacion = new Date(System.currentTimeMillis());;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_materia", nullable = false)
+	private Materia materia;
+
+	@OneToMany(
+			cascade = CascadeType.ALL, mappedBy = "curso"
+	)
+	private List<Matricula> matriculas;
+
+	public Curso() {
+		super();
+	}
+
+	public Curso(String nombre, String nrc, String descripcion, Date fecha_creacion, Materia materia) {
+		this.nombre = nombre;
+		this.nrc = nrc;
+		this.descripcion = descripcion;
+		this.fecha_creacion = fecha_creacion;
+		this.materia = materia;
+	}
+
+	public Curso(Long id, @NotBlank @Size(max = 50) String nombre, @NotBlank @Size(max = 5) String nrc,
+				 @NotBlank @Size(max = 255) String descripcion, Date fecha_creacion, Materia materia) {
+		super();
+		Id = id;
+		this.nombre = nombre;
+		this.nrc = nrc;
+		this.descripcion = descripcion;
+		this.fecha_creacion = fecha_creacion;
+		this.materia = materia;
+	}
+
+	public Curso(String nombre, String nrc, Materia materia) {
+		this.nombre = nombre;
+		this.nrc = nrc;
+		this.materia = materia;
+	}
+
 	public Long getId() {
 		return Id;
 	}
@@ -65,41 +121,11 @@ public class Curso implements Serializable{
 		this.materia = materia;
 	}
 
-	@NotBlank
-	@Column(name = "nombre")
-	@Size(max = 50)
-	private String nombre;
-	
-	@NotBlank
-	@Column(name = "nrc")
-	@Size(max = 5)
-	private String nrc;
-	
-	@NotBlank
-	@Column(name = "descripcion")
-	@Size(max = 255)
-	private String descripcion;
-	
-	public Curso() {
-		super();
+	public List<Matricula> getMatriculas() {
+		return matriculas;
 	}
 
-	public Curso(Long id, @NotBlank @Size(max = 50) String nombre, @NotBlank @Size(max = 5) String nrc,
-			@NotBlank @Size(max = 255) String descripcion, Date fecha_creacion, Materia materia) {
-		super();
-		Id = id;
-		this.nombre = nombre;
-		this.nrc = nrc;
-		this.descripcion = descripcion;
-		this.fecha_creacion = fecha_creacion;
-		this.materia = materia;
+	public void setMatriculas(List<Matricula> matriculas) {
+		this.matriculas = matriculas;
 	}
-
-	@CreatedDate
-	@Column(name = "fecha_creacion")
-	private Date fecha_creacion;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_materia", nullable = false)
-	private Materia materia;
 }

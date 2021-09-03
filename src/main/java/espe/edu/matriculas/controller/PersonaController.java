@@ -30,7 +30,7 @@ public class PersonaController {
         return persona;
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id){
         personaService.delete(id);
     }
@@ -40,18 +40,23 @@ public class PersonaController {
         return personaService.findAll();
     }
 
-    @GetMapping("{id}/exists")
-    public Boolean exists(@PathVariable Long id){
-        return personaService.existsById(id);
+    @GetMapping("/{ci}/exists-by-cedula")
+    public Boolean existsByCedula(@PathVariable String ci){
+        return personaService.existsByCedula(ci);
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable Long id){
         if(personaService.existsById(id)){
             return ResponseEntity.ok().body(personaService.findById(id));
         }else {
             return new ResponseEntity(new MessageResponse("La persona con el id: "+id+" no ha sido encontrada.") , HttpStatus.NOT_FOUND);
         }
+    }
+
+    @GetMapping("/{id}/cuentas")
+    public List<Cuenta> listCuentas(@PathVariable Long id){
+        return personaService.findById(id).getCuentas();
     }
 
 }

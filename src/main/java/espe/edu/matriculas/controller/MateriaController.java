@@ -3,13 +3,10 @@ package espe.edu.matriculas.controller;
 import java.util.List;
 
 import espe.edu.matriculas.entities.Curso;
+import espe.edu.matriculas.entities.Materia;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import espe.edu.matriculas.entities.Carrera;
 import espe.edu.matriculas.entities.Cuenta;
@@ -20,8 +17,6 @@ import espe.edu.matriculas.service.MateriaService;
 @RestController
 @RequestMapping("/api/materias")
 public class MateriaController {
-	@Autowired
-    AuthenticationManager authenticationManager;
 
     @Autowired
     MateriaService materiaService;
@@ -29,6 +24,12 @@ public class MateriaController {
     @GetMapping("/{id}/list/cursos")
     public List<Curso> listCarrera(@PathVariable Long id){
         return materiaService.findMateriaCursos(id);
+    }
+
+    @PostMapping("")
+    public Materia save(@RequestBody Materia materia){
+        materiaService.save(materia);
+        return materia;
     }
 
 }

@@ -15,7 +15,7 @@ public class CursoService implements ICursoService{
     
     @Override
     public void save(Curso curso) {
-        dao.save(curso);
+        dao.saveAndFlush(curso);
     }
 
     @Override
@@ -30,8 +30,22 @@ public class CursoService implements ICursoService{
 
 	@Override
 	public Curso findById(Long id) {
-		// TODO Auto-generated method stub
 		return dao.findById(id).get();
 	}
-    
+
+    @Override
+    public Curso findByNrc(String nrc) {
+        return dao.findByNrc(nrc);
+    }
+
+    @Override
+    public boolean existsByNrc(String nrc) {
+        return dao.existsByNrc(nrc);
+    }
+
+    @Override
+    public boolean existsByNombre(String nombre) {
+        return dao.existsByNombre(nombre);
+    }
+
 }

@@ -6,6 +6,7 @@ import espe.edu.matriculas.service.CuentaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,7 +24,7 @@ public class CuentaController {
         return cuentaService.findAll();
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable Long id){
         if(cuentaService.existsById(id)){
             return ResponseEntity.ok(cuentaService.findById(id));
@@ -31,5 +32,13 @@ public class CuentaController {
             return new ResponseEntity(new MessageResponse("Cuenta no encontrada"), HttpStatus.NOT_FOUND);
         }
     }
+
+    @PostMapping("")
+    public Cuenta save(@RequestBody Cuenta cuenta) throws JpaSystemException{
+        cuentaService.save(cuenta);
+        return cuenta;
+    }
+
+
 
 }

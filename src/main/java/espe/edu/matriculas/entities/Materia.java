@@ -4,6 +4,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.io.Serializable;
 import java.sql.Date;
@@ -29,9 +30,8 @@ public class Materia {
 	)
 	private List<Curso> cursos;
 
-	@CreatedDate
 	@Column(name = "fecha_creacion")
-	private Date fecha_creacion;
+	private Date fecha_creacion = new Date(System.currentTimeMillis());
 
 	@ManyToOne(
 			fetch = FetchType.LAZY
@@ -89,4 +89,19 @@ public class Materia {
 		this.fecha_creacion = fecha_creacion;
 		this.carrera = carrera;
 	}
+
+	public Materia(String nombre, List<Curso> cursos, Date fecha_creacion, Carrera carrera) {
+		this.nombre = nombre;
+		this.cursos = cursos;
+		this.fecha_creacion = fecha_creacion;
+		this.carrera = carrera;
+	}
+
+	public Materia(String nombre, Date fecha_creacion, Carrera carrera) {
+		this.nombre = nombre;
+		this.fecha_creacion = fecha_creacion;
+		this.carrera = carrera;
+	}
+
+
 }

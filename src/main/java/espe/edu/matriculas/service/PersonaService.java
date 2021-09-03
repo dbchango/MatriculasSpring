@@ -15,7 +15,7 @@ public class PersonaService implements IPersonaService {
 
     @Override
     public void save(Persona persona) {
-        dao.save(persona);
+        dao.saveAndFlush(persona);
     }
 
     @Override
@@ -39,7 +39,18 @@ public class PersonaService implements IPersonaService {
     }
 
     @Override
+    public boolean existsByCedula(String ci) {
+        return dao.existsByCedula(ci);
+    }
+
+    @Override
     public Persona findById(Long id) {
         return dao.findById(id).get();
     }
+
+    @Override
+    public Persona findByCedula(String ci) {
+        return dao.findByCedula(ci);
+    }
+
 }

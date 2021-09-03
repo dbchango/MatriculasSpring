@@ -1,19 +1,29 @@
 package espe.edu.matriculas.entities;
 
 import javax.persistence.*;
+import javax.validation.Constraint;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.List;
 
-@Table(name = "personas")
+@Table(name = "personas",
+uniqueConstraints = {
+        @UniqueConstraint(columnNames = "cedula")
+})
 @Entity
+
 public class Persona implements Serializable {
     @Id
     @Column(name = "Id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
+
+    @NotBlank
+    @Column(name = "cedula")
+    @Size(max = 10)
+    private String cedula;
 
     @Column(name = "edad")
     private int edad;
@@ -42,11 +52,26 @@ public class Persona implements Serializable {
     )
     private List<Cuenta> cuentas;
 
+    @OneToMany(
+            cascade = CascadeType.ALL, mappedBy = "persona"
+    )
+    private List<Matricula> matriculas;
+
     public Persona() {
     }
 
-    public Persona(long id, int edad, String nombres, String apellidos, String correo, String direccion) {
+    public Persona(long id, int edad, String nombres, String cedula, String apellidos, String correo, String direccion) {
         Id = id;
+        this.edad = edad;
+        this.cedula = cedula;
+        this.nombres = nombres;
+        this.apellidos = apellidos;
+        this.correo = correo;
+        this.direccion = direccion;
+    }
+
+    public Persona(String cedula, int edad, String nombres, String apellidos, String correo, String direccion) {
+        this.cedula = cedula;
         this.edad = edad;
         this.nombres = nombres;
         this.apellidos = apellidos;
@@ -54,8 +79,20 @@ public class Persona implements Serializable {
         this.direccion = direccion;
     }
 
-    public long getId() {
-        return Id;
+    public Persona(String cedula, int edad, String nombres, String apellidos, String correo, String direccion, List<Cuenta> cuentas) {
+        this.cedula = cedula;
+        this.edad = edad;
+        this.nombres = nombres;
+        this.apellidos = apellidos;
+        this.correo = correo;
+        this.direccion = direccion;
+        this.cuentas = cuentas;
+    }
+
+    public Persona(String cedula, String nombres, String apellidos) {
+        this.cedula = cedula;
+        this.nombres = nombres;
+        this.apellidos = apellidos;
     }
 
     public int getEdad() {
@@ -76,10 +113,6 @@ public class Persona implements Serializable {
 
     public String getDireccion() {
         return direccion;
-    }
-
-    public void setId(long id) {
-        Id = id;
     }
 
     public void setEdad(int edad) {
@@ -110,4 +143,27 @@ public class Persona implements Serializable {
         this.cuentas = cuentas;
     }
 
+    public String getCedula() {
+        return cedula;
+    }
+
+    public void setCedula(String cedula) {
+        this.cedula = cedula;
+    }
+
+    public void setId(Long id) {
+        Id = id;
+    }
+
+    public Long getId() {
+        return Id;
+    }
+
+    public List<Matricula> getMatriculas() {
+        return matriculas;
+    }
+
+    public void setMatriculas(List<Matricula> matriculas) {
+        this.matriculas = matriculas;
+    }
 }

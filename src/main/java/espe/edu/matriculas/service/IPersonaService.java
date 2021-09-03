@@ -16,5 +16,10 @@ public interface IPersonaService {
 
     public boolean existsById(Long id);
 
+    public boolean existsByCedula(String ci);
+
     public Persona findById(Long id);
+
+    public Persona findByCedula(String ci);
+
 }

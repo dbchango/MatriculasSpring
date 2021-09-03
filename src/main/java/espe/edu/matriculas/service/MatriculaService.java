@@ -17,7 +17,7 @@ public class MatriculaService  implements IMatriculaService{
     
     @Override
     public void save(Matricula matricula) {
-        dao.save(matricula);
+        dao.saveAndFlush(matricula);
     }
 
     @Override
@@ -32,7 +32,6 @@ public class MatriculaService  implements IMatriculaService{
 
 	@Override
 	public Matricula findById(Long id) {
-		// TODO Auto-generated method stub
 		return dao.findById(id).get();
 	}
 	

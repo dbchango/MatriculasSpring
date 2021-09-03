@@ -33,6 +33,12 @@ public class Carrera implements Serializable {
     public Carrera() {
     }
 
+    public Carrera(String nombre, String descripcion, List<Materia> materias) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.materias = materias;
+    }
+
     public Carrera(long id, String nombre, long id_departamento, String descripcion) {
         Id = id;
         this.nombre = nombre;
