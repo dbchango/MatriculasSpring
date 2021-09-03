@@ -17,4 +17,6 @@ public interface IPersonaService {
     public boolean existsById(Long id);
 
     public Persona findById(Long id);
+
+    public List<Cuenta> findCuentasPendientes(Long id);
 }

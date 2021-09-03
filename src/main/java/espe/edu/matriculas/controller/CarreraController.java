@@ -26,4 +26,7 @@ public class CarreraController {
 	public List<Materia> listMaterias(@PathVariable Long id){
         return carreraService.findCarreraMaterias(id);
 	}
+
+
+
 }

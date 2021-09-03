@@ -16,8 +16,6 @@ public class Matricula implements Serializable{
 	@Column(name = "Id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Id;
-	
-
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_curso", nullable = false)
@@ -31,7 +29,6 @@ public class Matricula implements Serializable{
             cascade = CascadeType.ALL, mappedBy = "matricula"
     )
     private List<Cuenta> cuentas;
-    
     
 	@CreatedDate
 	@Column(name = "fecha_creacion")
@@ -88,5 +85,7 @@ public class Matricula implements Serializable{
 	public void setCuentas(List<Cuenta> cuentas) {
 		this.cuentas = cuentas;
 	}
+
+
 
 }
