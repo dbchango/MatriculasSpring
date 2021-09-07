@@ -1,6 +1,7 @@
 package espe.edu.matriculas.controller;
 
 import espe.edu.matriculas.entities.Cuenta;
+import espe.edu.matriculas.entities.Matricula;
 import espe.edu.matriculas.entities.Persona;
 import espe.edu.matriculas.payload.response.MessageResponse;
 import espe.edu.matriculas.service.PersonaService;
@@ -19,9 +20,9 @@ public class PersonaController {
     @Autowired
     PersonaService personaService;
 
-    @GetMapping("/{id}/list/cuentas")
-    public List<Cuenta> list(@PathVariable Long id){
-        return personaService.findCuentas(id);
+    @GetMapping("/{id}/list/matriculas")
+    public List<Matricula> list(@PathVariable Long id){
+        return personaService.findMatriculas(id);
     }
 
     @PostMapping("")
@@ -45,6 +46,11 @@ public class PersonaController {
         return personaService.existsByCedula(ci);
     }
 
+    @GetMapping("/{ci}/find-by-cedula")
+    public Persona findByCedula(@PathVariable String ci){
+        return personaService.findByCedula(ci);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable Long id){
         if(personaService.existsById(id)){
@@ -54,9 +60,10 @@ public class PersonaController {
         }
     }
 
-    @GetMapping("/{id}/cuentas")
-    public List<Cuenta> listCuentas(@PathVariable Long id){
-        return personaService.findById(id).getCuentas();
+    @GetMapping("/{id}/matriculas")
+    public List<Matricula> listCuentas(@PathVariable Long id){
+        return personaService.findMatriculas(id);
+
     }
 
 }

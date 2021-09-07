@@ -1,4 +1,6 @@
 package espe.edu.matriculas.entities;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -70,7 +72,7 @@ public class Carrera implements Serializable {
         this.descripcion = descripcion;
     }
 
-
+    @JsonManagedReference(value = "carrera_materias")
     public List<Materia> getMaterias() {
         return materias;
     }

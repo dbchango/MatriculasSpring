@@ -1,6 +1,7 @@
 package espe.edu.matriculas.service;
 
 import espe.edu.matriculas.entities.Cuenta;
+import espe.edu.matriculas.entities.Matricula;
 import espe.edu.matriculas.entities.Persona;
 
 import java.util.List;
@@ -12,7 +13,7 @@ public interface IPersonaService {
 
     public void delete(Long id);
 
-    public List<Cuenta> findCuentas(long id);
+    public List<Matricula> findMatriculas(long id);
 
     public boolean existsById(Long id);
 

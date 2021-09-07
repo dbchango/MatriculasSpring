@@ -1,6 +1,7 @@
 package espe.edu.matriculas.service;
 
 import espe.edu.matriculas.entities.Cuenta;
+import espe.edu.matriculas.entities.Matricula;
 import espe.edu.matriculas.entities.Persona;
 import espe.edu.matriculas.repository.IPersonaRep;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +30,9 @@ public class PersonaService implements IPersonaService {
     }
 
     @Override
-    public List<Cuenta> findCuentas(long id){
-        return dao.findById(id).get().getCuentas();
+    public List<Matricula> findMatriculas(long id){
+        return dao.findById(id).get().getMatriculas();
+
     }
 
     @Override

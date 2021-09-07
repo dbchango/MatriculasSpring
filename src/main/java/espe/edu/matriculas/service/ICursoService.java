@@ -19,4 +19,5 @@ public interface ICursoService {
     public boolean existsByNrc(String nrc);
 
     public boolean existsByNombre(String nombre);
+
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import espe.edu.matriculas.entities.Curso;
 import espe.edu.matriculas.entities.Materia;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,7 +27,8 @@ public class MateriaController {
         return materiaService.findMateriaCursos(id);
     }
 
-    @PostMapping("")
+    @PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
     public Materia save(@RequestBody Materia materia){
         materiaService.save(materia);
         return materia;

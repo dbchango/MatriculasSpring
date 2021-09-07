@@ -4,6 +4,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.io.Serializable;
@@ -113,14 +115,17 @@ public class Curso implements Serializable{
 		this.fecha_creacion = fecha_creacion;
 	}
 
+	@JsonBackReference(value = "materia_cursos")
 	public Materia getMateria() {
 		return materia;
 	}
+
 
 	public void setMateria(Materia materia) {
 		this.materia = materia;
 	}
 
+	@JsonManagedReference(value = "curso_matriculas")
 	public List<Matricula> getMatriculas() {
 		return matriculas;
 	}

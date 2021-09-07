@@ -1,5 +1,7 @@
 package espe.edu.matriculas.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import javax.validation.Constraint;
 import javax.validation.constraints.Email;
@@ -50,11 +52,6 @@ public class Persona implements Serializable {
     @OneToMany(
             cascade = CascadeType.ALL, mappedBy = "persona"
     )
-    private List<Cuenta> cuentas;
-
-    @OneToMany(
-            cascade = CascadeType.ALL, mappedBy = "persona"
-    )
     private List<Matricula> matriculas;
 
     public Persona() {
@@ -79,15 +76,6 @@ public class Persona implements Serializable {
         this.direccion = direccion;
     }
 
-    public Persona(String cedula, int edad, String nombres, String apellidos, String correo, String direccion, List<Cuenta> cuentas) {
-        this.cedula = cedula;
-        this.edad = edad;
-        this.nombres = nombres;
-        this.apellidos = apellidos;
-        this.correo = correo;
-        this.direccion = direccion;
-        this.cuentas = cuentas;
-    }
 
     public Persona(String cedula, String nombres, String apellidos) {
         this.cedula = cedula;
@@ -135,14 +123,6 @@ public class Persona implements Serializable {
         this.direccion = direccion;
     }
 
-    public List<Cuenta> getCuentas() {
-        return cuentas;
-    }
-
-    public void setCuentas(List<Cuenta> cuentas) {
-        this.cuentas = cuentas;
-    }
-
     public String getCedula() {
         return cedula;
     }
@@ -159,6 +139,7 @@ public class Persona implements Serializable {
         return Id;
     }
 
+    @JsonManagedReference(value = "persona_matriculas")
     public List<Matricula> getMatriculas() {
         return matriculas;
     }

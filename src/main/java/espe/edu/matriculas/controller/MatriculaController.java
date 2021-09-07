@@ -13,6 +13,7 @@ import espe.edu.matriculas.service.PersonaService;
 import espe.edu.matriculas.utils.SolicitudMatricula;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -39,7 +40,8 @@ public class MatriculaController {
 
     @GetMapping("/{id}/list/cuentas")
     public List<Cuenta> listCursos(@PathVariable Long id){
-        return matriculaService.findById(id).getCuentas();
+        //return matriculaService.findById(id).getCuentas();
+        return null;
     }
 
     @GetMapping("")
@@ -47,10 +49,19 @@ public class MatriculaController {
         return matriculaService.findAll();
     }
 
-    @PostMapping("")
-    public Matricula save(@RequestBody Matricula matricula){
-        matriculaService.save(matricula);
-        return matricula;
+    @PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity<?> save(@RequestBody Matricula matricula){
+        try{
+            // set matricula reference for cuenta
+            matricula.getCuenta().setMatricula(matricula);
+            matriculaService.save(matricula);
+            return ResponseEntity.ok().body(matricula);
+        }catch (JpaSystemException e){
+            return new ResponseEntity(new MessageResponse(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+
     }
 
     @GetMapping("/{id}")
@@ -71,18 +82,18 @@ public class MatriculaController {
             Curso curso = cursoService.findByNrc(solicitud.getNrc_curso());
 
             // verificacion de que el estudiante no tiene cuentas pendientes
-            List<Cuenta> cuentasPendientes = persona.getCuentas();
+            List<Matricula> matriculas = persona.getMatriculas();
             int countCuentasPendientes = 0;
-            for (Cuenta c:
-                 cuentasPendientes) {
-                if(c.isEstado()==true) countCuentasPendientes++;
+            for (Matricula m:
+                 matriculas) {
+                if(m.getCuenta().isEstado()==true) countCuentasPendientes++;
             }
 
             if(countCuentasPendientes>0) return ResponseEntity.badRequest().body(new MessageResponse("La persona: "+persona.getApellidos()+" "+persona.getNombres()+"  tiene: "+countCuentasPendientes+" cuentas pendientes"));
 
             Matricula matricula = new Matricula(curso, persona);
             matriculaService.save(matricula);
-            Cuenta cuenta = new Cuenta(persona, matricula);
+            Cuenta cuenta = new Cuenta( matricula);
             cuentaService.save(cuenta);
             return new ResponseEntity(new MessageResponse("La persona "+persona.getApellidos() + " " + persona.getNombres() + " se ha matriculado en " + curso.getMateria().getNombre() + " correctamente."), HttpStatus.CREATED);
 

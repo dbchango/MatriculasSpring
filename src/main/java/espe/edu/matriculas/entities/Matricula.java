@@ -2,6 +2,7 @@ package espe.edu.matriculas.entities;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.io.Serializable;
@@ -24,11 +25,14 @@ public class Matricula implements Serializable{
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_persona", nullable = false)
 	private Persona persona;
-
+/*
 	@OneToMany(
             cascade = CascadeType.ALL, mappedBy = "matricula"
-    )
-    private List<Cuenta> cuentas;
+    )*/
+	@OneToOne(
+			mappedBy = "matricula", cascade = CascadeType.ALL
+	)
+    private Cuenta cuenta;
 
 	@Column(name = "fecha_creacion")
 	private Date fecha_creacion = new Date(System.currentTimeMillis());;
@@ -41,6 +45,7 @@ public class Matricula implements Serializable{
 		Id = id;
 	}
 
+	@JsonBackReference(value = "curso_matriculas")
 	public Curso getCurso() {
 		return curso;
 	}
@@ -49,6 +54,7 @@ public class Matricula implements Serializable{
 		this.curso = curso;
 	}
 
+	@JsonBackReference(value = "persona_matriculas")
 	public Persona getPersona() {
 		return persona;
 	}
@@ -83,13 +89,21 @@ public class Matricula implements Serializable{
 	public void setFecha_creacion(Date fecha_creacion) {
 		this.fecha_creacion = fecha_creacion;
 	}
-
-	public List<Cuenta> getCuentas() {
-		return cuentas;
+/*
+	public Cuenta getCuentas() {
+		return cuenta;
 	}
 
-	public void setCuentas(List<Cuenta> cuentas) {
-		this.cuentas = cuentas;
+	public void setCuentas(Cuenta cuentas) {
+		this.cuenta = cuentas;
+	}
+*/
+	//@JsonBackReference(value = "cuenta_matricula")
+	public Cuenta getCuenta() {
+		return cuenta;
 	}
 
+	public void setCuenta(Cuenta cuenta) {
+		this.cuenta = cuenta;
+	}
 }

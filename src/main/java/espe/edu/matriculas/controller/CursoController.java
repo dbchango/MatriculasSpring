@@ -38,4 +38,9 @@ public class CursoController {
         return cursoService.existsByNrc(nrc);
     }
 
+    @GetMapping("/{nrc}/find-by-nrc")
+    public Curso findByNrc(@PathVariable String nrc){
+        return cursoService.findByNrc(nrc);
+    }
+
 }

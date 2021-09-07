@@ -3,6 +3,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -55,6 +57,7 @@ public class Materia {
 		this.nombre = nombre;
 	}
 
+	@JsonManagedReference(value = "materia_cursos")
 	public List<Curso> getCursos() {
 		return cursos;
 	}
@@ -71,6 +74,7 @@ public class Materia {
 		this.fecha_creacion = fecha_creacion;
 	}
 
+	@JsonBackReference(value = "carrera_materias")
 	public Carrera getCarrera() {
 		return carrera;
 	}
