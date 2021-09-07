@@ -1,0 +1,26 @@
+package espe.edu.matriculacion.service;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import espe.edu.matriculacion.entities.Curso;
+import espe.edu.matriculacion.entities.Persona;
+import espe.edu.matriculacion.repository.CursoRep;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.concurrent.ExecutionException;
+@Service
+public class CursoService implements ICursoService {
+
+    @Autowired
+    CursoRep cursoRep;
+
+    @Override
+    public Curso findByNrc(String nrc) throws ExecutionException, InterruptedException, JsonProcessingException {
+        return cursoRep.findByNrc(nrc);
+    }
+
+    @Override
+    public Boolean existsByNrc(String nrc) throws ExecutionException, InterruptedException, JsonProcessingException {
+        return cursoRep.existsByNrc(nrc);
+    }
+}
