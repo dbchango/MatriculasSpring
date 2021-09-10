@@ -8,7 +8,9 @@
             <div >
                 <Register/>
             </div>
-       
+            <div >
+                <Matricula/>
+            </div>
         </v-main>
       
     </v-app>
@@ -17,6 +19,7 @@
 <script>
 import Login from './views/Login.vue'
 import Register from './views/Register.vue'
+import Matricula from './views/Matricula.vue'
 export default {
     data(){
         return {
@@ -26,6 +29,7 @@ export default {
     components: { 
         Login, 
         Register,
+        Matricula
     }, 
     mounted:function(){
     }
